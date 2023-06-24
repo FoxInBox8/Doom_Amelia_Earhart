@@ -61,4 +61,6 @@ public class Crab : MonoBehaviour, IEnemy
 		// Set it as disabled to prevent weird psuedo-alive stuff from happening
 		gameObject.SetActive(false);
 	}
+
+	public EnemyDataSO getStats() { return _statBlock; }
 }
