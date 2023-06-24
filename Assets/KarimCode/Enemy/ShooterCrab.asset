@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crabType: 3
   MaxHealth: 5
-  Speed: 0
   Damage: 3
+  CreditCost: 7

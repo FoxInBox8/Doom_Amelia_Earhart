@@ -5,10 +5,8 @@ using UnityEngine;
 public class CrabBullet : MonoBehaviour
 {
 	[SerializeField]
-	public float Speed = 0;
+	private float Speed = 0, _lifetime = 5, damage = 10;
 
-	[SerializeField]
-	float _lifetime = 5;
 	float _timeElapsed = 0;
 
 	Vector3 _direction;
@@ -32,4 +30,14 @@ public class CrabBullet : MonoBehaviour
 	{
 		_direction = direction.normalized;
 	}
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+		{
+			collision.gameObject.GetComponent<PlayerScript>().dealDamage(damage);
+		}
+
+		Destroy(gameObject);
+    }
 }
