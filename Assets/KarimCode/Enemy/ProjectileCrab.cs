@@ -7,28 +7,28 @@ using UnityEngine;
 public class ProjectileCrab : Crab
 {
 	[SerializeField]
-	GameObject _projectile;
+	private GameObject _projectile;
 
 	[SerializeField]
-	float _attackTimeInterval = 5;
-	float _elapsedTime = 0;
+	private float _attackTimeInterval = 5;
 
+	private float _elapsedTime = 0;
 
-	protected override void FixedUpdate()
+    protected override void Update()
+    {
+        _elapsedTime += Time.deltaTime;
+        if (_elapsedTime >= _attackTimeInterval)
+        {
+            _elapsedTime = 0;
+            Attack();
+        }
+
+        base.Update();
+    }
+
+	private void Attack()
 	{
-		_elapsedTime += Time.deltaTime;
-		if (_elapsedTime > _attackTimeInterval)
-		{
-			_elapsedTime = 0;
-			Attack();
-		}
-
-		base.FixedUpdate();
-	}
-
-	void Attack()
-	{
-		var projectile = Instantiate(_projectile, transform.position, transform.rotation);
-		projectile.GetComponent<CrabBullet>().Initialize(PlayerDirection);
+		GameObject projectile = Instantiate(_projectile, transform.position, transform.rotation);
+		projectile.GetComponent<CrabBullet>().Initialize(transform.forward);
 	}
 }

@@ -11,10 +11,5 @@ using UnityEngine;
 public class EnemyDataSO : ScriptableObject
 {
 	public CrabType crabType;
-
-	public int MaxHealth;
-	public float Speed;
-	public int Damage;
-
-	// todo: Add more values for whatever each creature would need
+	public int MaxHealth, Damage, CreditCost;
 }

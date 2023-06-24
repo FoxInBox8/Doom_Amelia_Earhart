@@ -13,11 +13,12 @@ public class CrabBullet : MonoBehaviour
 
 	Vector3 _direction;
 
-    void FixedUpdate()
+    private void Update()
     {
-		transform.Translate(_direction * Speed);
+		transform.position += Speed * Time.deltaTime * _direction;
 
 		_timeElapsed += Time.deltaTime;
+
 		if (_timeElapsed >= _lifetime)
 		{
 			Destroy(gameObject);
