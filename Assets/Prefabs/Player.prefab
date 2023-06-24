@@ -201,7 +201,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.1
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -218,11 +218,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 15
-  jumpForce: 5
-  gravity: 50
+  jumpForce: 7
+  maxFallSpeed: -50
+  gravity: 30
   startHealth: 100
   cameraXSensitivity: 0.25
   cameraYSensitivity: 0.25
+  healthBar: {fileID: 0}
 --- !u!1 &8361332261985583006
 GameObject:
   m_ObjectHideFlags: 0

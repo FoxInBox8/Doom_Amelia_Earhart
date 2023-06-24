@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
     [SerializeField]
-    private float moveSpeed, jumpForce, gravity, startHealth, cameraXSensitivity, cameraYSensitivity;
+    private float moveSpeed, jumpForce, maxFallSpeed, gravity, startHealth, cameraXSensitivity, cameraYSensitivity;
+
+    [SerializeField]
+    private Slider healthBar;
 
     private float cameraYaw = 0, cameraPitch = 0, yVelocity, currentHealth;
 
@@ -21,7 +25,7 @@ public class PlayerScript : MonoBehaviour
 
         playerInput.Game.Enable();
 
-        currentHealth = startHealth;
+        currentHealth = healthBar.maxValue = startHealth;
     }
 
     private void Update()
@@ -57,19 +61,25 @@ public class PlayerScript : MonoBehaviour
             controller.Move(moveSpeed * Time.deltaTime * movementVector.normalized);
         }
 
-        // Can only jump when grounded
-        if(!controller.isGrounded && playerInput.Game.Jump.WasPerformedThisFrame())
+        // If grounded, jump when button pressed, otherwise reset y velocity to prevent it from building up
+        if (controller.isGrounded)
         {
-            yVelocity = jumpForce;
+            yVelocity = playerInput.Game.Jump.WasPerformedThisFrame() ? jumpForce : 0;
         }
 
+        // We need to do this even when grounded to make sure isGrounded works correctly
         yVelocity -= gravity * Time.deltaTime;
+
+        // Don't fall faster than max fall speed
+        yVelocity = Mathf.Max(yVelocity, maxFallSpeed);
+
         controller.Move(new Vector3(0, yVelocity, 0) * Time.deltaTime);
     }
 
     public void dealDamage(float damage)
     {
         currentHealth -= damage;
+        healthBar.value = currentHealth;
 
         // Incomplete for now
         if(currentHealth <= 0)
@@ -84,5 +94,7 @@ public class PlayerScript : MonoBehaviour
 
         // Never heal above starting health
         currentHealth = Mathf.Min(currentHealth, startHealth);
+
+        healthBar.value = currentHealth;
     }
 }
