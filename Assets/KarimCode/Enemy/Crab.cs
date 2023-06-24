@@ -18,29 +18,51 @@ public class Crab : MonoBehaviour, IEnemy
 {
 	[SerializeField]
 	protected EnemyDataSO _statBlock;
-	protected int _currentHealth;
-	protected int _currentRow;
 
-	protected Transform player;
+	[SerializeField]
+	protected float timeBetweenAttacks;
+
+	protected int _currentHealth;
+	protected float attackTimer = 0;
+	protected bool touchingPlayer = false;
+
+	protected PlayerScript player;
 	protected NavMeshAgent agent;
 
 	protected virtual void Start()
     {
 		_currentHealth = _statBlock.MaxHealth;
+		attackTimer = timeBetweenAttacks;
 
-		player = FindAnyObjectByType<PlayerScript>().transform;
+		player = FindAnyObjectByType<PlayerScript>();
 		agent = GetComponent<NavMeshAgent>();
 	}
 
 	// Update is called once per frame
 	protected virtual void Update()
     {
-		Move();
+		move();
+
+		if(touchingPlayer)
+		{
+			attack();
+		}
     }
 
-	public virtual void Move()
+	protected virtual void move()
 	{
-		agent.destination = player.position;
+		agent.destination = player.transform.position;
+	}
+
+	protected virtual void attack()
+	{
+		attackTimer += Time.deltaTime;
+
+		if(attackTimer >= timeBetweenAttacks)
+		{
+			attackTimer = 0;
+			player.dealDamage(_statBlock.Damage);
+		}
 	}
 
 	public virtual void TakeDamage(int damage)
@@ -62,5 +84,21 @@ public class Crab : MonoBehaviour, IEnemy
 		gameObject.SetActive(false);
 	}
 
-	public EnemyDataSO getStats() { return _statBlock; }
+    protected void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player"))
+		{
+			touchingPlayer = true;
+		}
+    }
+
+    protected void OnTriggerExit(Collider other)
+    {
+        if(other.CompareTag("Player"))
+		{
+			touchingPlayer = false;
+		}
+    }
+
+    public EnemyDataSO getStats() { return _statBlock; }
 }

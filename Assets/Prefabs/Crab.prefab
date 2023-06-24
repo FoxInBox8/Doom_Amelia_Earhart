@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8106609805438940322}
   - component: {fileID: 6454232647997601876}
   - component: {fileID: 8747844037605471869}
+  - component: {fileID: 4969954954263941999}
   m_Layer: 0
   m_Name: Crab
   m_TagString: Enemy
@@ -120,6 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _statBlock: {fileID: 11400000, guid: a5412f6d7ae6b564cb7420c8c06cd9cd, type: 2}
+  timeBetweenAttacks: 2
 --- !u!195 &8747844037605471869
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -142,3 +144,24 @@ NavMeshAgent:
   m_BaseOffset: 0.44
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!135 &4969954954263941999
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450466563037155669}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.6
+  m_Center: {x: 0, y: 0, z: 0}

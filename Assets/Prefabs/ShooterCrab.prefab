@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4178442524841664247}
   - component: {fileID: 8947360545145716611}
   - component: {fileID: 8076528783455808930}
+  - component: {fileID: 2669523257459188252}
   m_Layer: 0
   m_Name: ShooterCrab
   m_TagString: Enemy
@@ -120,8 +121,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _statBlock: {fileID: 11400000, guid: ad87d2cf78188c94abe6277367fcb804, type: 2}
+  timeBetweenAttacks: 2
   _projectile: {fileID: 4514452065127742190, guid: 834a4d6d46d2be24aac9dfb7382cfe03, type: 3}
-  _attackTimeInterval: 3
+  timeBetweenShots: 5
 --- !u!195 &8076528783455808930
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -144,3 +146,24 @@ NavMeshAgent:
   m_BaseOffset: 0.44
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!135 &2669523257459188252
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3632400443720797222}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.6
+  m_Center: {x: 0, y: 0, z: 0}

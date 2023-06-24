@@ -10,14 +10,14 @@ public class ProjectileCrab : Crab
 	private GameObject _projectile;
 
 	[SerializeField]
-	private float _attackTimeInterval = 5;
+	private float timeBetweenShots = 5;
 
 	private float _elapsedTime = 0;
 
     protected override void Update()
     {
         _elapsedTime += Time.deltaTime;
-        if (_elapsedTime >= _attackTimeInterval)
+        if (_elapsedTime >= timeBetweenShots)
         {
             _elapsedTime = 0;
             Attack();
