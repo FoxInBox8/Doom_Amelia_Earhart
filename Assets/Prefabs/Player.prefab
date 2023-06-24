@@ -127,7 +127,7 @@ Transform:
   - {fileID: 8238292048600906344}
   - {fileID: 5419105379138215040}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1801972013320262462
 MeshFilter:
@@ -220,7 +220,7 @@ MonoBehaviour:
   moveSpeed: 15
   jumpForce: 5
   gravity: 50
-  health: 100
+  startHealth: 100
   cameraXSensitivity: 0.25
   cameraYSensitivity: 0.25
 --- !u!1 &8361332261985583006

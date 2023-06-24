@@ -5,9 +5,9 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     [SerializeField]
-    private float moveSpeed, jumpForce, gravity, health, cameraXSensitivity, cameraYSensitivity;
+    private float moveSpeed, jumpForce, gravity, startHealth, cameraXSensitivity, cameraYSensitivity;
 
-    private float cameraYaw = 0, cameraPitch = 0, yVelocity;
+    private float cameraYaw = 0, cameraPitch = 0, yVelocity, currentHealth;
 
     private Transform mainCamera;
     private CharacterController controller;
@@ -20,6 +20,8 @@ public class PlayerScript : MonoBehaviour
         playerInput = new PlayerControls();
 
         playerInput.Game.Enable();
+
+        currentHealth = startHealth;
     }
 
     private void Update()
@@ -67,12 +69,20 @@ public class PlayerScript : MonoBehaviour
 
     public void dealDamage(float damage)
     {
-        health -= damage;
+        currentHealth -= damage;
 
         // Incomplete for now
-        if(health <= 0)
+        if(currentHealth <= 0)
         {
-            Debug.Log("Dead");
+            throw new System.NotImplementedException();
         }
+    }
+
+    public void heal(float health)
+    {
+        currentHealth += health;
+
+        // Never heal above starting health
+        currentHealth = Mathf.Min(currentHealth, startHealth);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public enum CrabType
 {
@@ -20,51 +21,26 @@ public class Crab : MonoBehaviour, IEnemy
 	protected int _currentHealth;
 	protected int _currentRow;
 
-	// todo this shouldn't be public, it should get it from somewhere else (some global state, maybe it doesn't even need to exist here?)
-	[SerializeField]
-	protected Transform _playerPosition;
-	private Vector3 _playerDirection;
+	protected Transform player;
+	protected NavMeshAgent agent;
 
-	/// <summary>
-	/// Normalized property of the direction to the player.
-	/// </summary>
-	protected Vector3 PlayerDirection
-	{ 
-		get
-		{
-			return _playerDirection.normalized;
-		}
-
-		set
-		{
-			_playerDirection = value;
-		}
-	}
-
-	// Start is called before the first frame update
-	protected virtual void Awake()
+	protected virtual void Start()
     {
 		_currentHealth = _statBlock.MaxHealth;
+
+		player = FindAnyObjectByType<PlayerScript>().transform;
+		agent = GetComponent<NavMeshAgent>();
 	}
 
 	// Update is called once per frame
 	protected virtual void Update()
     {
-        
-    }
-
-	// called on delta time I think? i don't remember
-	protected virtual void FixedUpdate()
-	{
 		Move();
-	}
+    }
 
 	public virtual void Move()
 	{
-		PlayerDirection = _playerPosition.position - transform.position;
-
-		// Don't need to use Time.DeltaTime since this is fixed update
-		transform.Translate(PlayerDirection * _statBlock.Speed);
+		agent.destination = player.position;
 	}
 
 	public virtual void TakeDamage(int damage)
@@ -82,7 +58,7 @@ public class Crab : MonoBehaviour, IEnemy
 	{
 		Destroy(gameObject);
 
-		// set it as disabled to prevent weird psuedo-alive stuff from happening
+		// Set it as disabled to prevent weird psuedo-alive stuff from happening
 		gameObject.SetActive(false);
 	}
 }
