@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/IlantitleScene.unity
+    guid: a96e56c843973dd41a05d2c951aa6b59
+  - enabled: 1
+    path: Assets/Scenes/ilanScene(Level Sketch).unity
+    guid: a75efe9371ced9644a1b808a7c3b8a40
   m_configObjects: {}
