@@ -8,7 +8,7 @@ public class WaveManager : MonoBehaviour
     private int startCredits, creditsPerWave;
 
     [SerializeField]
-    private List<Crab> crabs;
+    private List<IEnemy> crabs;
 
     private int currentCredits;
     private EnemySpawnPoint[] spawnPoints;
@@ -34,7 +34,7 @@ public class WaveManager : MonoBehaviour
 
     private void spawnWave()
     {
-        List<Crab> affordableCrabs = new(crabs);
+        List<IEnemy> affordableCrabs = new(crabs);
 
         // Spawning algorithm:
         //  1. Choose a random crab from the list
@@ -45,7 +45,7 @@ public class WaveManager : MonoBehaviour
         {
             int randomEnemy = Random.Range(0, affordableCrabs.Count);
 
-            if (affordableCrabs[randomEnemy].getStats().CreditCost > currentCredits)
+            if (affordableCrabs[randomEnemy].GetStats().CreditCost > currentCredits)
             {
                 affordableCrabs.Remove(affordableCrabs[randomEnemy]);
             }
@@ -56,12 +56,17 @@ public class WaveManager : MonoBehaviour
                 int randomSpawnPoint = Random.Range(0, spawnPoints.Length);
                 Vector3 spawnPos = spawnPoints[randomSpawnPoint].getNearbyPoint();
 
-                // Make sure all enemies spawn on the ground, will probably break if the terrain is not all flat
-                spawnPos.y = affordableCrabs[randomEnemy].transform.localScale.y / 2;
+				var enemy = affordableCrabs[randomEnemy] as MonoBehaviour;
 
-                Instantiate(affordableCrabs[randomEnemy], spawnPos, transform.rotation);
-                currentCredits -= affordableCrabs[randomEnemy].getStats().CreditCost;
-            }
+				if (enemy != null)
+				{
+					// Make sure all enemies spawn on the ground, will probably break if the terrain is not all flat
+					spawnPos.y = enemy.transform.localScale.y / 2;
+
+					Instantiate(enemy, spawnPos, transform.rotation);
+					currentCredits -= affordableCrabs[randomEnemy].GetStats().CreditCost;
+				}
+			}
         }
     }
 }

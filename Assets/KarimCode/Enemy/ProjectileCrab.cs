@@ -29,6 +29,8 @@ public class ProjectileCrab : Crab
 	private void Attack()
 	{
 		GameObject projectile = Instantiate(_projectile, transform.position, transform.rotation);
-		projectile.GetComponent<CrabBullet>().Initialize(transform.forward);
+
+		var directionToPlayer = player.transform.position - transform.position;
+		projectile.GetComponent<CrabBullet>().Initialize(directionToPlayer);
 	}
 }
