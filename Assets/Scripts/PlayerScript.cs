@@ -147,4 +147,6 @@ public class PlayerScript : MonoBehaviour
 
         healthBar.value = currentHealth;
     }
+
+    public void addForce(Vector3 force) { forceVector += force; }
 }
