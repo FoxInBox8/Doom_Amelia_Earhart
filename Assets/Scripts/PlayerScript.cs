@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
     [SerializeField]
-    private float moveSpeed, jumpForce, maxFallSpeed, gravity, startHealth, cameraXSensitivity, cameraYSensitivity;
+    private float moveSpeed, jumpForce, maxFallSpeed, gravity, drag, bhopWindow, bhopSpeedBoost, startHealth, cameraXSensitivity, cameraYSensitivity;
 
     [SerializeField]
     private Slider healthBar;
 
-    private float cameraYaw = 0, cameraPitch = 0, yVelocity, currentHealth;
+    private float cameraYaw = 0, cameraPitch = 0, yVelocity, currentHealth, bhopTimer;
+    private bool prevFrameGrounded, canBhop;
+    private Vector3 forceVector;
 
     private Transform mainCamera;
     private CharacterController controller;
@@ -26,12 +29,16 @@ public class PlayerScript : MonoBehaviour
         playerInput.Game.Enable();
 
         currentHealth = healthBar.maxValue = startHealth;
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
     {
         updateCamera();
         updateMovement();
+
+        Debug.Log(forceVector);
     }
 
     private void updateCamera()
@@ -51,6 +58,8 @@ public class PlayerScript : MonoBehaviour
 
     private void updateMovement()
     {
+        prevFrameGrounded = controller.isGrounded;
+
         Vector2 inputVector = playerInput.Game.Movement.ReadValue<Vector2>();
 
         if (inputVector != Vector2.zero)
@@ -61,12 +70,6 @@ public class PlayerScript : MonoBehaviour
             controller.Move(moveSpeed * Time.deltaTime * movementVector.normalized);
         }
 
-        // If grounded, jump when button pressed, otherwise reset y velocity to prevent it from building up
-        if (controller.isGrounded)
-        {
-            yVelocity = playerInput.Game.Jump.WasPerformedThisFrame() ? jumpForce : 0;
-        }
-
         // We need to do this even when grounded to make sure isGrounded works correctly
         yVelocity -= gravity * Time.deltaTime;
 
@@ -74,6 +77,55 @@ public class PlayerScript : MonoBehaviour
         yVelocity = Mathf.Max(yVelocity, maxFallSpeed);
 
         controller.Move(new Vector3(0, yVelocity, 0) * Time.deltaTime);
+
+        if(controller.isGrounded)
+        {
+            checkJumping();
+        }
+
+        // Apply forces if we have any
+        if(forceVector !=  Vector3.zero)
+        {
+            controller.Move(forceVector * Time.deltaTime);
+
+            // Apply drag
+            forceVector = Vector3.Lerp(forceVector, Vector3.zero, drag * Time.deltaTime);
+        }
+    }
+
+    private void checkJumping()
+    {
+        // If we just landed, allow the player to bhop
+        if (!prevFrameGrounded)
+        {
+            canBhop = true;
+        }
+
+        if (playerInput.Game.Jump.WasPerformedThisFrame())
+        {
+            yVelocity = jumpForce;
+
+            // If we can bhop, do so
+            if (canBhop && bhopTimer <= bhopWindow)
+            {
+                forceVector += transform.forward * bhopSpeedBoost;
+            }
+
+            // If player does normal jump, reset bhopping
+            else
+            {
+                bhopTimer = 0;
+                canBhop = false;
+            }
+        }
+
+        else
+        {
+            bhopTimer += Time.deltaTime;
+
+            // Prevent y velocity from building up while grounded
+            yVelocity = 0;
+        }
     }
 
     public void dealDamage(float damage)
