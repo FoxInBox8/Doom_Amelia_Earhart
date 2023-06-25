@@ -37,8 +37,6 @@ public class PlayerScript : MonoBehaviour
     {
         updateCamera();
         updateMovement();
-
-        Debug.Log(forceVector);
     }
 
     private void updateCamera()
