@@ -34,7 +34,14 @@ public class Gun : MonoBehaviour
         ShotBuffer();
     }
 
-    public void DealDMG(RaycastHit raycast)
+    public void Raycast(Transform camTransform, LayerMask layermask)
+    {
+        RaycastHit hit;
+        Physics.Raycast(camTransform.position, camTransform.forward, out hit, Mathf.Infinity, layermask);
+        DealDMG(hit);
+    }
+
+    private void DealDMG(RaycastHit raycast)
     {
         if (shotReady)
         {
