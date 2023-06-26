@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DMG: 6
+  range: 10000
   shotCD: 0.7
 --- !u!1 &2557141977257971766
 GameObject:
