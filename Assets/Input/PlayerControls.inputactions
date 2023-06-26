@@ -33,7 +33,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Shoot",
+                    "name": "Fire",
                     "type": "Button",
                     "id": "ecaa3695-0190-4392-ab4f-c353f1fee77f",
                     "expectedControlType": "Button",
@@ -81,7 +81,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shoot",
+                    "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -92,7 +92,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Shoot",
+                    "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -11,17 +11,24 @@ public class Hand : MonoBehaviour
     [SerializeField] GameObject currentGun;
     public int selectedGun;
     private bool gunExist;
+    private PlayerControls playerControls;
+    private int layermask;
+    private Transform camTransform;
 
     void Start()
     {
+        camTransform = Camera.main.transform;
+        layermask = 1 << 3;
+        layermask = ~layermask;
         selectedGun = 0;
         gunExist = false;
         ChangeGun();
+        playerControls = GetComponentInParent<PlayerScript>().getInputs();
     }
 
     void Update()
     {
-        
+        Fire();
     }
 
     private void ChangeGun()
@@ -36,7 +43,9 @@ public class Hand : MonoBehaviour
 
     private void Fire()
     {
-        RaycastHit hit;
-        //IN PROGRESS
+        if (playerControls.Game.Fire.WasPerformedThisFrame())
+        {
+            currentGun.GetComponent<Gun>().Raycast(camTransform, layermask);
+        }
     }
 }
