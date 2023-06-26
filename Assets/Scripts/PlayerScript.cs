@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
@@ -141,10 +142,9 @@ public class PlayerScript : MonoBehaviour
         currentHealth -= damage;
         healthBar.value = currentHealth;
 
-        // Incomplete for now
         if(currentHealth <= 0)
         {
-            throw new System.NotImplementedException();
+            SceneManager.LoadSceneAsync("IlantitleScene");
         }
     }
 

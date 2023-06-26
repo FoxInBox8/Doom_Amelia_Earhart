@@ -78,6 +78,8 @@ public class Crab : MonoBehaviour, IEnemy
 
 	public virtual void Die()
 	{
+		FindObjectOfType<ScoreManager>().increaseScore(_statBlock.score);
+
 		Destroy(gameObject);
 
 		// Set it as disabled to prevent weird psuedo-alive stuff from happening
