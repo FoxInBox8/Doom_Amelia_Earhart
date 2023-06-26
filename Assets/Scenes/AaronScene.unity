@@ -820,11 +820,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startCredits: 1
   creditsPerWave: 5
-  crabs:
-  - {fileID: 6454232647997601876, guid: db03f3b2ccf3d144cbe32fe36c6380ec, type: 3}
-  - {fileID: 4479245767351784553, guid: 9995324902c354044b1e5bb7f9435f18, type: 3}
-  - {fileID: 1377878248169560412, guid: fc41ca70f361f0d4b8fafb572fa8967d, type: 3}
-  - {fileID: 8947360545145716611, guid: bf6f5e9b2bc70e542903687408aece31, type: 3}
 --- !u!1 &1367183709
 GameObject:
   m_ObjectHideFlags: 0
