@@ -2501,6 +2501,14 @@ PrefabInstance:
       propertyPath: _lineRenderer
       value: 
       objectReference: {fileID: 641582353}
+    - target: {fileID: 7872728594597514665, guid: eaf03c7cc09744548b0cc8693ad33ce0, type: 3}
+      propertyPath: guns.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7872728594597514665, guid: eaf03c7cc09744548b0cc8693ad33ce0, type: 3}
+      propertyPath: guns.Array.data[1]
+      value: 
+      objectReference: {fileID: 2160206534211969139, guid: b4463d5739d29a94a9130376a744c011, type: 3}
     - target: {fileID: 8361332261985583006, guid: eaf03c7cc09744548b0cc8693ad33ce0, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -6347,6 +6355,7 @@ LineRenderer:
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -6354,14 +6363,23 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.059734646
-        value: 0.11650479
+        time: 0.039821927
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -0
+        outSlope: -0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.1183575
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4

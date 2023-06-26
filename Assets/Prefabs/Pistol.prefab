@@ -96,5 +96,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8acb26cfd80351840ad39bac37b2f12d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DMG: 2
-  shotCD: 2
+  DMG: 1
+  shotCD: 0.1

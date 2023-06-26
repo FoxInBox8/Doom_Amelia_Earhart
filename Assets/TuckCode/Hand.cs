@@ -29,6 +29,38 @@ public class Hand : MonoBehaviour
     void Update()
     {
         Fire();
+        CycleGuns();
+    }
+
+    private void CycleGuns()
+    {
+        if(playerControls.Game.GunUp.WasPerformedThisFrame())
+        {
+            if(selectedGun + 1 >= guns.Length)
+            {
+                selectedGun = 0;
+                ChangeGun();
+            }
+            else
+            {
+                selectedGun++;
+                ChangeGun();
+            }
+        }
+
+        if(playerControls.Game.GunDown.WasPerformedThisFrame())
+        {
+            if (selectedGun - 1 <= 0)
+            {
+                selectedGun = guns.Length - 1;
+                ChangeGun();
+            }
+            else
+            {
+                selectedGun--;
+                ChangeGun();
+            }
+        }
     }
 
     private void ChangeGun()
@@ -36,9 +68,11 @@ public class Hand : MonoBehaviour
         if (gunExist)
         {
             Destroy(currentGun);
+            gunExist = false;
         }
         currentGun = Instantiate(guns[selectedGun], gameObject.transform);
         currentGun.transform.position = gameObject.transform.position;
+        gunExist = true;
     }
 
     private void Fire()
