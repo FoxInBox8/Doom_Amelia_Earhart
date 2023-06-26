@@ -5,6 +5,7 @@ using UnityEngine;
 //Squid with pistol in each tentacle
 public class Squid : MonoBehaviour, IEnemy
 {
+	[SerializeField]
 	protected EnemyDataSO _statBlock;
 
 	[SerializeField]
