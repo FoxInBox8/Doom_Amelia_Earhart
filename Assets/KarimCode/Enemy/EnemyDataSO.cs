@@ -11,5 +11,5 @@ using UnityEngine;
 public class EnemyDataSO : ScriptableObject
 {
 	public CrabType crabType;
-	public int MaxHealth, Damage, CreditCost;
+	public int MaxHealth, Damage, CreditCost, score;
 }
