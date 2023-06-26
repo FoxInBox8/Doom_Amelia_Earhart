@@ -16,3 +16,4 @@ MonoBehaviour:
   MaxHealth: 20
   Damage: 10
   CreditCost: 12
+  score: 10
