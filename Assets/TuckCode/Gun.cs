@@ -7,6 +7,8 @@ public class Gun : MonoBehaviour
 
     [SerializeField] int DMG;
 
+    [SerializeField] float range;
+
     private GameObject gunModel;
 
     private float shotTimer;
@@ -37,7 +39,7 @@ public class Gun : MonoBehaviour
     public virtual void Raycast(Transform camTransform, LayerMask layermask)
     {
         RaycastHit hit;
-        Physics.Raycast(camTransform.position, camTransform.forward, out hit, Mathf.Infinity, layermask);
+        Physics.Raycast(camTransform.position, camTransform.forward, out hit, range, layermask);
         DealDMG(hit);
     }
 

@@ -97,4 +97,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DMG: 1
+  range: 10000
   shotCD: 0.1
