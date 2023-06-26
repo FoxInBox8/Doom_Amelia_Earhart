@@ -5,6 +5,8 @@ using UnityEngine;
 //Shark (eats player if they go out of bounds)
 public class Shark : MonoBehaviour, IEnemy
 {
+	protected EnemyDataSO _statBlock;
+
 	public void Die()
 	{
 		throw new System.NotImplementedException();
@@ -26,4 +28,6 @@ public class Shark : MonoBehaviour, IEnemy
     {
         
     }
+
+	public EnemyDataSO GetStats() { return _statBlock; }
 }

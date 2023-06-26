@@ -102,5 +102,5 @@ public class Crab : MonoBehaviour, IEnemy
 		}
     }
 
-    public EnemyDataSO getStats() { return _statBlock; }
+	public EnemyDataSO GetStats() { return _statBlock; }
 }
