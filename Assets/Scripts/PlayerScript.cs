@@ -20,7 +20,7 @@ public class PlayerScript : MonoBehaviour
     private CharacterController controller;
     private PlayerControls playerInput;
 
-    private void Start()
+    private void Awake()
     {
         mainCamera = Camera.main.transform;
         controller = GetComponent<CharacterController>();
@@ -33,10 +33,20 @@ public class PlayerScript : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    private void Start()
+    {
+
+    }
+
     private void Update()
     {
         updateCamera();
         updateMovement();
+    }
+
+    public PlayerControls getInputs()
+    {
+        return playerInput;
     }
 
     private void updateCamera()
