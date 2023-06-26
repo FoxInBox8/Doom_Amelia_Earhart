@@ -7,6 +7,8 @@ public class Gun : MonoBehaviour
 
     [SerializeField] int DMG;
 
+    [SerializeField] float range;
+
     private GameObject gunModel;
 
     private float shotTimer;
@@ -24,24 +26,24 @@ public class Gun : MonoBehaviour
         return gunModel.GetComponent<MeshRenderer>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         shotTimer = shotCD;
     }
 
-    void Update()
+    protected virtual void Update()
     {
         ShotBuffer();
     }
 
-    public void Raycast(Transform camTransform, LayerMask layermask)
+    public virtual void Raycast(Transform camTransform, LayerMask layermask)
     {
         RaycastHit hit;
-        Physics.Raycast(camTransform.position, camTransform.forward, out hit, Mathf.Infinity, layermask);
+        Physics.Raycast(camTransform.position, camTransform.forward, out hit, range, layermask);
         DealDMG(hit);
     }
 
-    private void DealDMG(RaycastHit raycast)
+    protected virtual void DealDMG(RaycastHit raycast)
     {
         if (shotReady)
         {
@@ -55,7 +57,7 @@ public class Gun : MonoBehaviour
         }
     }
 
-    private void ShotBuffer()
+    protected virtual void ShotBuffer()
     {
         if(shotReady == false)
         {
@@ -66,6 +68,7 @@ public class Gun : MonoBehaviour
             else
             {
                 shotReady = true;
+                shotTimer = shotCD;
             }
         }
     }

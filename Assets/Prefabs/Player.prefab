@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5419105379138215040}
   - component: {fileID: 6289614336181635783}
   - component: {fileID: 2901947106606903806}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 3594780135121814084}
   - component: {fileID: 5149345174945329992}
   - component: {fileID: 4262021341600858459}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 3484100643151946378}
   - component: {fileID: 7872728594597514665}
   - component: {fileID: 2066530248300331853}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,6 +293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guns:
   - {fileID: 624469209346380995, guid: cd266cb81e3df804c839fcf997ad0e31, type: 3}
+  - {fileID: 2160206534211969139, guid: b4463d5739d29a94a9130376a744c011, type: 3}
   currentGun: {fileID: 0}
   selectedGun: 0
 --- !u!23 &2066530248300331853
@@ -349,7 +350,7 @@ GameObject:
   - component: {fileID: 1708234884352487494}
   - component: {fileID: 5088557494840340334}
   - component: {fileID: 4482160459389552273}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Direction Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
