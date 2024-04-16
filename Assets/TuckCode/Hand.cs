@@ -15,6 +15,9 @@ public class Hand : MonoBehaviour
     private int layermask;
     private Transform camTransform;
 
+    [SerializeField] private AudioSource source;
+    [SerializeField] private AudioClip gunShot;
+
     void Start()
     {
         camTransform = Camera.main.transform;
@@ -23,6 +26,7 @@ public class Hand : MonoBehaviour
         selectedGun = 0;
         gunExist = false;
         ChangeGun();
+
         playerControls = GetComponentInParent<PlayerScript>().getInputs();
     }
 
@@ -79,6 +83,7 @@ public class Hand : MonoBehaviour
     {
         if (playerControls.Game.Fire.WasPerformedThisFrame())
         {
+            source.PlayOneShot(gunShot);
             currentGun.GetComponent<Gun>().Raycast(camTransform, layermask);
         }
     }
