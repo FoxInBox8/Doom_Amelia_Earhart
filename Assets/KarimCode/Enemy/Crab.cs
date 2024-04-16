@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public enum CrabType
 {
@@ -22,6 +23,9 @@ public class Crab : MonoBehaviour, IEnemy
 	[SerializeField]
 	protected float timeBetweenAttacks;
 
+	[SerializeField]
+	private Slider healthBar;
+
 	protected int _currentHealth;
 	protected float attackTimer = 0;
 	protected bool touchingPlayer = false;
@@ -33,6 +37,8 @@ public class Crab : MonoBehaviour, IEnemy
     {
 		_currentHealth = _statBlock.MaxHealth;
 		attackTimer = timeBetweenAttacks;
+		healthBar.maxValue = _currentHealth;
+		healthBar.value = _currentHealth;
 
 		player = FindAnyObjectByType<PlayerScript>();
 		agent = GetComponent<NavMeshAgent>();
@@ -68,7 +74,8 @@ public class Crab : MonoBehaviour, IEnemy
 	public virtual void TakeDamage(int damage)
 	{
 		_currentHealth -= damage;
-		Debug.Log($"{gameObject.name} taking {damage} damage, health is {_currentHealth}");
+		//Debug.Log($"{gameObject.name} taking {damage} damage, health is {_currentHealth}");
+		healthBar.value = _currentHealth;
 
 		if (_currentHealth <= 0)
 		{
