@@ -55,11 +55,6 @@ public class PlayerScript : MonoBehaviour
         return playerInput;
     }
 
-    private void ADS()
-    {
-
-    }
-
     private void updateCamera()
     {
         Vector2 cameraInput = playerInput.Game.Camera.ReadValue<Vector2>();
@@ -94,6 +89,10 @@ public class PlayerScript : MonoBehaviour
             }
 
             controller.Move(currentMoveSpeed * Time.deltaTime * movementVector.normalized);
+        }
+        else if(inputVector == Vector2.zero)
+        {
+            sprint = false;
         }
 
         // We need to do this even when grounded to make sure isGrounded works correctly
