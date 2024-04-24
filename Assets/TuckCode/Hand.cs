@@ -9,6 +9,7 @@ public class Hand : MonoBehaviour
 
     [SerializeField] GameObject[] guns;
     [SerializeField] GameObject currentGun;
+    [SerializeField] GameObject zoomGun;
     public int selectedGun;
     private bool gunExist;
     private PlayerControls playerControls;
@@ -34,6 +35,7 @@ public class Hand : MonoBehaviour
     {
         Fire();
         CycleGuns();
+        ADS(); 
     }
 
     private void CycleGuns()
@@ -77,6 +79,21 @@ public class Hand : MonoBehaviour
         currentGun = Instantiate(guns[selectedGun], gameObject.transform);
         currentGun.transform.position = gameObject.transform.position;
         gunExist = true;
+    }
+
+    private void ADS()
+    {
+        if(Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            Camera.main.fieldOfView -= 30;
+            currentGun.transform.position = zoomGun.transform.position;
+        }
+
+        if(Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            Camera.main.fieldOfView += 30;
+            currentGun.transform.position = gameObject.transform.position;
+        }
     }
 
     private void Fire()

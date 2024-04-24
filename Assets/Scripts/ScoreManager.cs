@@ -20,7 +20,8 @@ public class ScoreManager : MonoBehaviour
     {
         scoreText = GetComponent<TMP_Text>();
 
-        scoreText.text = char.ConvertFromUtf32(SMILING_OPEN);
+        //scoreText.text = char.ConvertFromUtf32(SMILING_OPEN);
+        scoreText.text = "0";
     }
 
     public void increaseScore(int score)
@@ -28,10 +29,13 @@ public class ScoreManager : MonoBehaviour
         currentScore += score;
         scoreText.text = string.Empty;
 
+        scoreText.text = currentScore.ToString();
+
+        //EMOJI MODE
         // For each digit in the score, convert the digit from char to int, then get the emoji at that int's index and add it to the score text
-        foreach(char c in currentScore.ToString().ToCharArray())
+        /*foreach(char c in currentScore.ToString().ToCharArray())
         {
             scoreText.text += char.ConvertFromUtf32(EMOJI_LIST[int.Parse(c.ToString())]);
-        }
+        }*/
     }
 }

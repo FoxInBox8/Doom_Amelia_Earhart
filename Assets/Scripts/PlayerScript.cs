@@ -8,10 +8,12 @@ using UnityEngine.UI;
 public class PlayerScript : MonoBehaviour
 {
     [SerializeField]
-    private float moveSpeed, jumpForce, maxFallSpeed, gravity, drag, bhopWindow, bhopSpeedBoost, startHealth, cameraXSensitivity, cameraYSensitivity;
+    private float moveSpeed, sprintSpeed, jumpForce, maxFallSpeed, gravity, drag, bhopWindow, bhopSpeedBoost, startHealth, cameraXSensitivity, cameraYSensitivity;
 
     [SerializeField]
     private Slider healthBar;
+
+    private bool sprint;
 
     private float cameraYaw = 0, cameraPitch = 0, yVelocity, currentHealth, bhopTimer;
     private bool prevFrameGrounded, canBhop;
@@ -26,6 +28,8 @@ public class PlayerScript : MonoBehaviour
         mainCamera = Camera.main.transform;
         controller = GetComponent<CharacterController>();
         playerInput = new PlayerControls();
+
+        sprint = false;
 
         playerInput.Game.Enable();
 
@@ -43,11 +47,17 @@ public class PlayerScript : MonoBehaviour
     {
         updateCamera();
         updateMovement();
+        toggleSprint();
     }
 
     public PlayerControls getInputs()
     {
         return playerInput;
+    }
+
+    private void ADS()
+    {
+
     }
 
     private void updateCamera()
@@ -76,7 +86,14 @@ public class PlayerScript : MonoBehaviour
             // Redirect movement vector to be in direction of transform
             Vector3 movementVector = transform.right * inputVector.x + transform.forward * inputVector.y;
 
-            controller.Move(moveSpeed * Time.deltaTime * movementVector.normalized);
+            //is sprinting
+            float currentMoveSpeed = moveSpeed;
+            if(sprint)
+            {
+                currentMoveSpeed = sprintSpeed;
+            }
+
+            controller.Move(currentMoveSpeed * Time.deltaTime * movementVector.normalized);
         }
 
         // We need to do this even when grounded to make sure isGrounded works correctly
@@ -99,6 +116,14 @@ public class PlayerScript : MonoBehaviour
 
             // Apply drag
             forceVector = Vector3.Lerp(forceVector, Vector3.zero, drag * Time.deltaTime);
+        }
+    }
+
+    private void toggleSprint()
+    {
+        if(Input.GetKeyDown("h"))
+        {
+            sprint = !sprint;
         }
     }
 
