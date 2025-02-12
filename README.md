@@ -1,4 +1,4 @@
-#What the heck is Doom Amelia Earhart??
+## What the heck is Doom Amelia Earhart??
 
 Created as part of a small game jam, DOOM: AE is a first person wave based survival game set in the  ocean after the legendary Amelia Earhart went down in her journy across the great sea. 
 
